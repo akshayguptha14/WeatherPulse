@@ -1,0 +1,474 @@
+/* ==========================================================================
+   WEATHERPULSE - BIG DATA ECOSYSTEM INFRASTRUCTURE MONITOR
+   Dark cinematic glassmorphism theme with live telemetry chips and diagnostics
+   ========================================================================== */
+
+.ecosystem-container {
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.ecosystem-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ecosystem-title-group h3 {
+  margin: 0 0 4px 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #f1f5f9;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ecosystem-title-group p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.ecosystem-meta-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: #cbd5e1;
+  backdrop-filter: blur(12px);
+}
+
+.meta-chip.chip-online {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #34d399;
+}
+
+.meta-chip.chip-warn {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.3);
+  color: #fbbf24;
+}
+
+.meta-chip.chip-cached {
+  background: rgba(99, 102, 241, 0.12);
+  border-color: rgba(99, 102, 241, 0.3);
+  color: #a5b4fc;
+}
+
+.btn-eco-action {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e2e8f0;
+  padding: 5px 11px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(12px);
+}
+
+.btn-eco-action:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.btn-eco-action:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Grid Layout */
+.ecosystem-grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+@media (min-width: 1400px) {
+  .ecosystem-grid-cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Base Card - Tier 2 Liquid Glass */
+.eco-card {
+  background: var(--glass-kpi-bg, rgba(225, 238, 255, 0.08));
+  border-radius: 20px;
+  padding: 20px 22px;
+  border: 1px solid var(--glass-kpi-border, rgba(255, 255, 255, 0.20));
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18), inset 0 1.5px 1px rgba(255, 255, 255, 0.35);
+  backdrop-filter: var(--glass-kpi-blur, blur(24px) saturate(150%));
+  -webkit-backdrop-filter: var(--glass-kpi-blur, blur(24px) saturate(150%));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.eco-card:hover {
+  transform: translateY(-3px);
+  background: rgba(225, 238, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.30);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.24), inset 0 1.5px 1px rgba(255, 255, 255, 0.45);
+}
+
+.eco-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: transparent;
+  transition: background 0.3s ease;
+}
+
+/* Status themes */
+.eco-card.eco-status-running::before {
+  background: linear-gradient(90deg, #10b981, #06b6d4);
+}
+.eco-card.eco-status-running {
+  border-top-color: rgba(16, 185, 129, 0.3);
+}
+
+.eco-card.eco-status-available::before {
+  background: linear-gradient(90deg, #3b82f6, #06b6d4);
+}
+.eco-card.eco-status-available {
+  border-top-color: rgba(59, 130, 246, 0.3);
+}
+
+.eco-card.eco-status-degraded::before {
+  background: linear-gradient(90deg, #f59e0b, #eab308);
+}
+.eco-card.eco-status-degraded {
+  border-top-color: rgba(245, 158, 11, 0.3);
+}
+
+.eco-card.eco-status-stopped::before,
+.eco-card.eco-status-unavailable::before {
+  background: linear-gradient(90deg, #ef4444, #f43f5e);
+}
+.eco-card.eco-status-stopped,
+.eco-card.eco-status-unavailable {
+  border-top-color: rgba(239, 68, 68, 0.3);
+}
+
+/* Card Header */
+.eco-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.eco-service-identity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.eco-icon-wrapper {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #38bdf8;
+  flex-shrink: 0;
+}
+
+.eco-service-identity h4 {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #f8fafc;
+  line-height: 1.2;
+}
+
+.eco-service-sub {
+  font-size: 0.68rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Status Pill */
+.eco-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  letter-spacing: 0.3px;
+}
+
+.eco-status-pill.pill-running,
+.eco-status-pill.pill-available {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.eco-status-pill.pill-degraded {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.eco-status-pill.pill-stopped,
+.eco-status-pill.pill-unavailable {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.eco-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.pill-running .eco-pulse-dot,
+.pill-available .eco-pulse-dot {
+  background-color: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  animation: ecoPulse 2s infinite ease-in-out;
+}
+
+.pill-degraded .eco-pulse-dot {
+  background-color: #f59e0b;
+  box-shadow: 0 0 6px #f59e0b;
+}
+
+.pill-stopped .eco-pulse-dot,
+.pill-unavailable .eco-pulse-dot {
+  background-color: #ef4444;
+}
+
+@keyframes ecoPulse {
+  0% { transform: scale(0.95); opacity: 0.7; }
+  50% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 12px #10b981; }
+  100% { transform: scale(0.95); opacity: 0.7; }
+}
+
+/* Metric Chips Container */
+.eco-chips-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.eco-metric-chip {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  color: #cbd5e1;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.eco-metric-chip strong {
+  color: #f1f5f9;
+  font-weight: 600;
+}
+
+.eco-metric-chip.chip-accent {
+  background: rgba(56, 189, 248, 0.08);
+  border-color: rgba(56, 189, 248, 0.2);
+  color: #7dd3fc;
+}
+
+.eco-metric-chip.chip-success {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.2);
+  color: #6ee7b7;
+}
+
+.eco-metric-chip.chip-highlight {
+  background: rgba(139, 92, 246, 0.1);
+  border-color: rgba(139, 92, 246, 0.25);
+  color: #c4b5fd;
+}
+
+/* Details Description */
+.eco-card-details {
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: #94a3b8;
+  margin-bottom: 12px;
+  word-break: break-word;
+}
+
+/* Card Footer */
+.eco-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  margin-top: auto;
+  font-size: 0.7rem;
+}
+
+.eco-latency-tag {
+  color: #64748b;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.eco-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.eco-webui-link {
+  color: #38bdf8;
+  text-decoration: none;
+  font-size: 0.7rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  transition: all 0.2s ease;
+}
+
+.eco-webui-link:hover {
+  background: rgba(56, 189, 248, 0.2);
+  color: #e0f2fe;
+}
+
+.eco-diag-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 2px;
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+
+.eco-diag-btn:hover {
+  color: #ffffff;
+}
+
+/* Diagnostic Drawer */
+.eco-diag-drawer {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(12px);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.68rem;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+.eco-diag-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+}
+
+.eco-diag-row:last-child {
+  border-bottom: none;
+}
+
+.eco-diag-label {
+  color: #64748b;
+}
+
+.eco-diag-val {
+  color: #cbd5e1;
+  font-weight: 500;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Loading Card */
+.eco-card.eco-loading {
+  opacity: 0.7;
+}
+
+/* Minimal variant (for live stream sidebar) */
+.ecosystem-container.eco-minimal .ecosystem-grid-cards {
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.ecosystem-container.eco-minimal .eco-card {
+  padding: 12px;
+}
+
+.ecosystem-container.eco-minimal .eco-chips-group {
+  margin-bottom: 6px;
+}
+
+.ecosystem-container.eco-minimal .eco-card-details {
+  margin-bottom: 6px;
+}
+
+/* Error banner */
+.eco-error-banner {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fca5a5;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+}

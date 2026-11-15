@@ -1,0 +1,55 @@
+# Environment secrets
+.env
+.env.*
+!.env.example
+!.env.example.*
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+
+# Node
+node_modules/
+frontend/node_modules/
+frontend/dist/
+
+# Build outputs
+dist/
+build/
+coverage/
+
+# Logs and runtime files
+*.log
+logs/
+*.pid
+*.lock
+
+# Generated datasets and large runtime data
+data/generated/
+data/output/
+*.parquet
+*.avro
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Hadoop and Spark runtime artifacts
+spark-warehouse/
+metastore_db/
+derby.log
+
+# Temporary and generated project files
+backend/scratch/
+backend/data/alerts_state.json
+backend/data/quality_state.json
+data/results/

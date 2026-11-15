@@ -1,0 +1,653 @@
+/* ==========================================================================
+   WEATHERPULSE INTERNAL APPLICATION LAYOUT
+   Cinematic Floating Glass Topbar • Zero Left Sidebar • Full Viewport Stage
+   Transparent Layered Glassmorphism Design System
+   ========================================================================== */
+
+.wp-app-shell {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: transparent !important;
+  color: #f8fafc;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wp-app-shell.light-theme {
+  background: transparent !important;
+  color: #0f172a;
+}
+
+/* --------------------------------------------------------------------------
+   0. Realistic Atmospheric Static Photographic Background (No Video on Internal Pages)
+   -------------------------------------------------------------------------- */
+.wp-internal-bg-media {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.wp-internal-bg-photo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  filter: brightness(0.92) contrast(1.05) saturate(1.05);
+}
+
+.wp-internal-photo-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(12, 18, 30, 0.22) 0%,
+    rgba(10, 16, 28, 0.30) 35%,
+    rgba(8, 14, 24, 0.44) 70%,
+    rgba(6, 10, 18, 0.60) 100%
+  );
+}
+
+.light-theme .wp-internal-bg-photo {
+  opacity: 0.22;
+  filter: brightness(1.05) contrast(0.95);
+}
+
+.light-theme .wp-internal-photo-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(248, 250, 252, 0.78) 0%,
+    rgba(241, 245, 249, 0.88) 100%
+  );
+}
+
+/* --------------------------------------------------------------------------
+   1. Floating Liquid Glass Capsule Navigation Bar (Top-Navbar, Zero Sidebar)
+   -------------------------------------------------------------------------- */
+.wp-app-topbar {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 88%;
+  max-width: 1380px;
+  height: 52px;
+  z-index: 1000;
+  background: rgba(14, 22, 36, 0.35);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18), 
+              inset 0 1px 0.5px 0 rgba(255, 255, 255, 0.35), 
+              inset 0 -1px 2px 0 rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+}
+
+.wp-app-topbar.scrolled {
+  transform: translateX(-50%);
+  background: rgba(12, 18, 30, 0.65);
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35), 
+              inset 0 1px 0.5px 0 rgba(255, 255, 255, 0.45);
+}
+
+.light-theme .wp-app-topbar {
+  background: rgba(255, 255, 255, 0.80);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 9999px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.light-theme .wp-app-topbar.scrolled {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.12);
+}
+
+.wp-topbar-inner {
+  width: 100%;
+  padding: 0 16px 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Brand on Left */
+.wp-app-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  flex-shrink: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.wp-app-brand:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+}
+
+.wp-app-brand-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 9999px;
+  background: rgba(196, 181, 253, 0.08);
+  border: 1px solid rgba(196, 181, 253, 0.22);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ddd6fe;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.20);
+}
+
+.light-theme .wp-app-brand-icon {
+  background: rgba(37, 99, 235, 0.08);
+  border-color: rgba(37, 99, 235, 0.2);
+  color: #2563eb;
+}
+
+.wp-app-brand-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.wp-app-brand-name {
+  font-size: 1.0rem;
+  font-weight: 550;
+  letter-spacing: -0.015em;
+  color: #ffffff;
+  line-height: 1.15;
+}
+
+.light-theme .wp-app-brand-name {
+  color: #0f172a;
+}
+
+.wp-app-brand-tag {
+  font-size: 0.60rem;
+  font-weight: 450;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #c4b5fd;
+}
+
+.light-theme .wp-app-brand-tag {
+  color: #6366f1;
+}
+
+/* Subtle Vertical Divider between Brand and Nav */
+.wp-brand-divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
+  margin: 0 6px 0 2px;
+}
+
+/* Horizontal Center Navigation */
+.wp-app-nav-row {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-wrap: nowrap;
+}
+
+.wp-app-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: 9999px;
+  text-decoration: none;
+  font-size: 0.80rem;
+  font-weight: 400;
+  color: #cbd5e1;
+  border: 1px solid transparent;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.light-theme .wp-app-nav-link {
+  color: #64748b;
+}
+
+.wp-app-nav-link:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.14);
+  transform: translateY(-1px);
+}
+
+.light-theme .wp-app-nav-link:hover {
+  color: #0f172a;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.wp-app-nav-link.active {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.10), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  font-weight: 500;
+}
+
+.light-theme .wp-app-nav-link.active {
+  color: #0284c7;
+  background: rgba(2, 132, 199, 0.08);
+  border-color: rgba(2, 132, 199, 0.25);
+  box-shadow: none;
+}
+
+.wp-nav-icon {
+  opacity: 0.85;
+}
+
+.wp-app-nav-link.active .wp-nav-icon {
+  color: #38bdf8;
+  opacity: 1;
+}
+
+.light-theme .wp-app-nav-link.active .wp-nav-icon {
+  color: #0284c7;
+}
+
+/* Right Actions Row */
+.wp-app-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.wp-app-live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 13px;
+  border-radius: 9999px;
+  background: rgba(6, 78, 59, 0.45);
+  border: 1px solid rgba(52, 211, 153, 0.40);
+  text-decoration: none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wp-app-live-pill:hover {
+  background: rgba(6, 78, 59, 0.65);
+  border-color: rgba(52, 211, 153, 0.65);
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.40), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.wp-live-label {
+  font-size: 0.70rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #6ee7b7;
+}
+
+.wp-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #34d399;
+  box-shadow: 0 0 10px #34d399, 0 0 4px #10b981;
+  animation: liveDotPulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes liveDotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.wp-app-action-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.light-theme .wp-app-action-btn {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #64748b;
+  border-radius: 9999px;
+}
+
+.wp-app-action-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.28);
+  transform: translateY(-1px);
+}
+
+.light-theme .wp-app-action-btn:hover {
+  color: #0f172a;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* Liquid Glass Theme Pill Toggle (Matching Reference Image) */
+.wp-app-theme-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 52px;
+  height: 28px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 0 6px;
+  cursor: pointer;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wp-app-theme-pill:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.30);
+}
+
+.light-theme .wp-app-theme-pill {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.theme-icon {
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  transition: color 0.2s ease;
+}
+
+.theme-icon.sun {
+  color: #fbbf24;
+}
+
+.theme-icon.moon {
+  color: #c4b5fd;
+}
+
+.theme-toggle-knob {
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease;
+  z-index: 1;
+}
+
+.wp-app-theme-pill.is-dark .theme-toggle-knob {
+  transform: translateX(24px);
+  background: rgba(196, 181, 253, 0.95);
+  box-shadow: 0 0 10px rgba(196, 181, 253, 0.5);
+}
+
+.wp-app-theme-pill.is-light .theme-toggle-knob {
+  transform: translateX(0);
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.wp-app-mobile-toggle {
+  display: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #f8fafc;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.light-theme .wp-app-mobile-toggle {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #0f172a;
+  border-radius: 9999px;
+}
+
+/* --------------------------------------------------------------------------
+   3. Floating Mobile Navigation Panel
+   -------------------------------------------------------------------------- */
+.wp-mobile-nav-panel {
+  position: fixed;
+  top: 86px;
+  left: 20px;
+  right: 20px;
+  background: rgba(13, 19, 33, 0.88);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  padding: 16px 20px 20px;
+  z-index: 999;
+}
+
+.light-theme .wp-mobile-nav-panel {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
+}
+
+.wp-mobile-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wp-mobile-nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #cbd5e1;
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.light-theme .wp-mobile-nav-item {
+  color: #334155;
+}
+
+.wp-mobile-nav-item:hover,
+.wp-mobile-nav-item.active {
+  background: rgba(56, 189, 248, 0.12);
+  color: #ffffff;
+}
+
+.light-theme .wp-mobile-nav-item:hover,
+.light-theme .wp-mobile-nav-item.active {
+  background: rgba(2, 132, 199, 0.08);
+  color: #0284c7;
+}
+
+.mobile-item-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mobile-item-arrow {
+  opacity: 0.5;
+}
+
+.wp-mobile-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+  z-index: 998;
+}
+
+/* --------------------------------------------------------------------------
+   4. Main Workspace Viewport (Full Available Width)
+   -------------------------------------------------------------------------- */
+.wp-main-stage {
+  flex: 1;
+  width: 100%;
+  padding-top: 86px;
+  padding-bottom: 44px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+.wp-stage-container {
+  width: 88%;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   5. Double-Layer Glass Composition: Floating Outer Glass Canvas (Reference 1)
+   -------------------------------------------------------------------------- */
+.wp-outer-glass-canvas {
+  background: rgba(12, 18, 30, 0.20);
+  backdrop-filter: blur(14px) saturate(135%);
+  -webkit-backdrop-filter: blur(14px) saturate(135%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 28px;
+  padding: 24px 28px 28px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.20), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.20);
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.wp-outer-glass-canvas::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  pointer-events: none;
+}
+
+.light-theme .wp-outer-glass-canvas {
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+@media (max-width: 768px) {
+  .wp-stage-container {
+    padding: 0 12px;
+  }
+  .wp-outer-glass-canvas {
+    padding: 22px 18px 28px;
+    border-radius: 20px;
+  }
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1280px) {
+  .wp-app-nav-row {
+    gap: 2px;
+  }
+  .wp-app-nav-link {
+    padding: 5px 8px;
+    font-size: 0.76rem;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .wp-app-nav-row {
+    display: none;
+  }
+  .wp-app-mobile-toggle {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .wp-app-topbar {
+    top: 10px;
+    left: 12px;
+    right: 12px;
+    transform: none;
+    width: auto;
+    height: 54px;
+    border-radius: 14px;
+  }
+  .wp-app-topbar.scrolled {
+    transform: none;
+  }
+  .wp-topbar-inner {
+    padding: 0 14px;
+  }
+  .wp-stage-container {
+    padding: 0 16px;
+  }
+  .wp-app-brand-tag {
+    display: none;
+  }
+  .wp-main-stage {
+    padding-top: 92px;
+    padding-bottom: 40px;
+  }
+}
