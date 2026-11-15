@@ -23,7 +23,6 @@ import {
   CloudLightning
 } from 'lucide-react';
 import { getSummary, getEcosystemStatus } from '../services/api';
-import heroImage from '../assets/hero.png';
 import './HomeView.css';
 
 const HomeView = ({ theme, toggleTheme }) => {
@@ -110,14 +109,14 @@ const HomeView = ({ theme, toggleTheme }) => {
             muted
             playsInline
             preload="auto"
-            poster={heroImage}
+            poster="/weather-bg-poster.jpg"
             onError={() => setVideoError(true)}
           >
             <source src="/weather-bg.mp4" type="video/mp4" />
           </video>
         )}
         <img 
-          src={heroImage} 
+          src="/weather-bg-poster.jpg" 
           alt="Storm Weather Background" 
           className="wp-fixed-bg-fallback-img" 
         />
